@@ -48,6 +48,28 @@
 
 % Villen lisäämät paketit
 \usepackage{nomencl}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning}
+\usetikzlibrary{decorations.markings,
+                decorations.pathreplacing,
+                decorations.pathmorphing
+                }
+
+% Lyhennysten ja symbolien listat
+\makenomenclature
+%% This removes the main title:
+\renewcommand{\nomname}{}
+%% this modifies item separation:
+\setlength{\nomitemsep}{8pt}
+%% this part defines the groups:
+%----------------------------------------------
+\usepackage{etoolbox}
+\renewcommand\nomgroup[1]{%
+  \item[\Large\bfseries
+  \ifstrequal{#1}{S}{Symbolit}{%
+  \ifstrequal{#1}{L}{Lyhenteet}{}}%
+]\vspace{10pt}} % this is to add vertical space between the groups.
+%----------------------------------------------
 
 % Package documentation
 % ftp://ctan.tug.org/tex-archive/macros/latex/contrib/subfig/subfig.pdf

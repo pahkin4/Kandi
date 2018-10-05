@@ -74,21 +74,6 @@
 \newcommand{\angs}{\textsl{\AA}}              % , e.g. slanted symbol for �ngst�m
 
 
-% Lyhennysten ja symbolien listat
-\makenomenclature
-%% This removes the main title:
-\renewcommand{\nomname}{}
-%% this modifies item separation:
-\setlength{\nomitemsep}{8pt}
-%% this part defines the groups:
-%----------------------------------------------
-\usepackage{etoolbox}
-\renewcommand\nomgroup[1]{%
-  \item[\Large\bfseries
-  \ifstrequal{#1}{S}{Symbolit}{%
-  \ifstrequal{#1}{L}{Lyhenteet}{}}%
-]\vspace{10pt}} % this is to add vertical space between the groups.
-%----------------------------------------------
 
 % Preparatory content ends here
 
@@ -281,7 +266,6 @@ On behalf of the working group, Erno Salminen
 %
 
 % Lyhenteet ja symbolit
-
 \nomenclature[L]{\textbf{OP}}{original poster}
 \nomenclature[S]{$h$}{Plank constant}
 \nomenclature[S]{$c$}{speed of light in vacuum}
@@ -324,15 +308,17 @@ On behalf of the working group, Erno Salminen
 \cleardoublepage
 \fi
 
+
+
+
+\chapter{Introduction}
 \pagenumbering{arabic}
-\setcounter{page}{0} % Start numbering from zero because command
+\setcounter{page}{1} % Start numbering from zero because command
                      % 'chapter*' does page break
 \renewcommand{\chaptername}{} % This disables the prefix 'Chapter' or
                               % 'Luku' in page headers (in 'twoside'
                               % mode)
-
-
-\chapter{Introduction}
+                            %   
 \label{ch:intro} 
 % \label{...} allows cross-referencing, e.g. 'as explained in
 % Chapter~\ref{ch:intro}' Note that you may have to run the command
@@ -1044,6 +1030,45 @@ providing an overview of the most important points.
 
 Appendices are purely optional.  All appendices must be referred to in
 the body text
+\begin{figure}[ht]
+    \centering
+    \subfigure[Hydrofobinen pinta]{
+    \begin{tikzpicture}[
+    x=2cm,y=2cm,
+    interface/.style={
+        % The border decoration is a path replacing decorator. 
+        % For the interface style we want to draw the original path.
+        % The postaction option is therefore used to ensure that the
+        % border decoration is drawn *after* the original path.
+        postaction={draw,decorate,decoration={border,angle=-45,
+                    amplitude=0.3cm,segment length=2mm}}}
+                    ]
+    \draw[black,interface](-2.1,0)--(2.1,0);
+    \filldraw[fill=blue!20!white, draw=blue!40!black](1,0) arc (-20:200:1) -- cycle;
+    \draw[black](1,0) -- ++(70:2);
+    \draw[black](2,0) arc (0:70:1) ;
+    \path(1,0)++(35:1.3) node{$\theta$};
+    \end{tikzpicture}
+    }
+    
+    \subfigure[Hydrofiilinen pinta]{
+    \begin{tikzpicture}[
+    x=2cm,y=2cm,
+    interface/.style={
+        postaction={draw,decorate,decoration={border,angle=-45,
+                    amplitude=0.3cm,segment length=2mm}}}
+                    ]
+    \draw[black,interface](-2.1,0)--(2.1,0);
+    \filldraw[fill=blue!20!white, draw=blue!40!black](1,0) arc (20:160:1) -- cycle;
+    \draw[black](1,0) -- ++(110:2);
+    \draw[black](2,0) arc (0:110:1);
+    \path(1,0)++(35:1.3) node{$\theta$};
+    \end{tikzpicture}
+    }
+    
+    \caption{Kontaktikulma, TikZ harjoittelua}
+    \label{fig:my_label}
+\end{figure}
 
 \def\appB{APPENDIX B. Something completely different} % Define another new command
 \chapter*{\appB}                       % As above, but use \appB instead of \appA
